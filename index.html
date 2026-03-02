@@ -1,20 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title>BrewContent - Account Deletion</title>
-  <style>
-    body { font-family: sans-serif; background: #0a0a0a; color: #fff; padding: 40px; }
-    .container { max-width: 600px; margin: 0 auto; background: #1a1a1a; padding: 30px; border-radius: 10px; }
-    h1 { color: #9cc744; }
-    </style><body>
-      <div class="container">
-        <h1>Account Deletion</h1>
-      <p>To delete your BrewContent account, please email support@brewcontent.ai</p>
-      <p>Include your registered email address.</p>
-      </div>div>
-    </body>
-</html></p></p></h1>
-    </body>
-  </style></title>
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrewContent — Account & Data Deletion</title>
+    <meta name="description" content="Request deletion of your BrewContent account and associated data.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 640px;
+            width: 100%;
+            background: #141414;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 48px 40px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #9CC744, #7AA832);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+        }
+        h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        .section {
+            margin-bottom: 28px;
+        }
+        .section h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #9CC744;
+            margin-bottom: 12px;
+        }
+        .steps {
+            list-style: none;
+            counter-reset: step;
+        }
+        .steps li {
+            counter-increment: step;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            background: #1a1a1a;
+            border: 1px solid #252525;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 16px;
+            top: 12px;
+            width: 22px;
+            height: 22px;
+            background: #9CC744;
+            color: #0a0a0a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .data-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .data-item {
+            padding: 10px 14px;
+            background: #1a1a1a;
+            border: 1px solid #252525;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .data-item .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .dot-red { background: #ff5555; }
+        .dot-yellow { background: #f0ad4e; }
+        .retained-note {
+            margin-top: 12px;
+            padding: 14px 16px;
+            background: rgba(240, 173, 78, 0.08);
+            border: 1px solid rgba(240, 173, 78, 0.2);
+            border-radius: 10px;
+            font-size: 13px;
+            color: #f0ad4e;
+            line-height: 1.5;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #aaa;
+            margin-bottom: 6px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #9CC744;
+        }
+        textarea { resize: vertical; min-height: 80px; }
+        select { cursor: pointer; appearance: none; }
+        .checkbox-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin: 20px 0;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            accent-color: #9CC744;
+        }
+        .checkbox-group label {
+            font-size: 13px;
+            color: #999;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        .submit-btn:hover { opacity: 0.9; }
+        .submit-btn:active { transform: scale(0.98); }
+        .submit-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .success-msg {
+            display: none;
+            text-align: center;
+            padding: 32px 20px;
+        }
+        .success-msg .check {
+            width: 64px;
+            height: 64px;
+            background: rgba(156, 199, 68, 0.1);
+            border: 2px solid #9CC744;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+        .success-msg h3 { color: #fff; font-size: 20px; margin-bottom: 8px; }
+        .success-msg p { color: #888; font-size: 14px; line-height: 1.6; }
+        .footer {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+        .footer a {
+            color: #9CC744;
+            text-decoration: none;
+        }
+        @media (max-width: 480px) {
+            .container { padding: 32px 24px; }
+            h1 { font-size: 22px; }
+            .data-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-icon">B</div>
+            <span class="logo-text">BrewContent</span>
+        </div>
+
+        <h1>Account & Data Deletion</h1>
+        <p class="subtitle">
+            Request deletion of your BrewContent account and all associated data. 
+            Please review the information below before submitting your request.
+        </p>
+
+        <div class="section">
+            <h2>Steps to Delete Your Account</h2>
+            <ol class="steps">
+                <li>Fill out the form below with your registered email address</li>
+                <li>Confirm that you understand the data deletion terms</li>
+                <li>Submit your request — our team will process it within <strong>7 business days</strong></li>
+                <li>You'll receive a confirmation email once your account is permanently deleted</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Data That Will Be Deleted</h2>
+            <div class="data-list">
+                <div class="data-item"><span class="dot dot-red"></span>Account profile</div>
+                <div class="data-item"><span class="dot dot-red"></span>Email & credentials</div>
+                <div class="data-item"><span class="dot dot-red"></span>Generated content</div>
+                <div class="data-item"><span class="dot dot-red"></span>Image creations</div>
+                <div class="data-item"><span class="dot dot-red"></span>Brand kit data</div>
+                <div class="data-item"><span class="dot dot-red"></span>Projects & templates</div>
+                <div class="data-item"><span class="dot dot-red"></span>Credit & usage history</div>
+                <div class="data-item"><span class="dot dot-red"></span>Subscription info</div>
+            </div>
+            <div class="retained-note">
+                ⚠️ <strong>Transaction records</strong> (payment history) may be retained for up to 
+                <strong>90 days</strong> after deletion for legal and financial compliance purposes, 
+                after which they are permanently removed.
+            </div>
+        </div>
+
+        <div class="section" id="form-section">
+            <h2>Submit Deletion Request</h2>
+            <form id="deleteForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="email">Registered Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="reason">Reason for Deletion (Optional)</label>
+                    <select id="reason" name="reason">
+                        <option value="">Select a reason...</option>
+                        <option value="no-longer-using">No longer using the app</option>
+                        <option value="privacy">Privacy concerns</option>
+                        <option value="switching">Switching to another service</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="comments">Additional Comments (Optional)</label>
+                    <textarea id="comments" name="comments" placeholder="Any additional information..."></textarea>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="confirm" required>
+                    <label for="confirm">
+                        I understand that all my data, including generated content, brand kits, 
+                        projects, and account information will be permanently deleted within 7 business days. 
+                        Transaction records may be retained for up to 90 days for legal compliance.
+                    </label>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                    Request Account Deletion
+                </button>
+            </form>
+        </div>
+
+        <div class="success-msg" id="successMsg">
+            <div class="check">✓</div>
+            <h3>Request Submitted</h3>
+            <p>
+                Your account deletion request has been sent successfully. 
+                Our team will process your request within 7 business days. 
+                You'll receive a confirmation email at your registered address.
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 BrewContent. All rights reserved.</p>
+            <p style="margin-top: 6px;">
+                Questions? Contact us at 
+                <a href="mailto:support@brewcontent.ai">support@brewcontent.ai</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const checkbox = document.getElementById('confirm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        checkbox.addEventListener('change', () => {
+            submitBtn.disabled = !checkbox.checked;
+        });
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const reason = document.getElementById('reason').value;
+            const comments = document.getElementById('comments').value;
+
+            const subject = encodeURIComponent('Account Deletion Request — BrewContent');
+            const body = encodeURIComponent(
+                `Account Deletion Request\n\n` +
+                `Email: ${email}\n` +
+                `Reason: ${reason || 'Not specified'}\n` +
+                `Comments: ${comments || 'None'}\n\n` +
+                `Please delete my BrewContent account and all associated data.`
+            );
+
+            // Open mailto to send the request
+            window.location.href = `mailto:support@brewcontent.ai?subject=${subject}&body=${body}`;
+
+            // Show success message
+            document.getElementById('form-section').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
